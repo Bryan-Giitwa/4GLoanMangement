@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Check, VisibilityOutlined, Logout } from "@mui/icons-material";
+import { Check, VisibilityOutlined } from "@mui/icons-material";
 import Message from "./Message";
 
 const GetBorrowers = ({ setAuth }) => {
