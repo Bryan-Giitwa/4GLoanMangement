@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Check, VisibilityOutlined } from "@mui/icons-material";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Check, VisibilityOutlined, Logout } from "@mui/icons-material";
 import Message from "./Message";
 
 const GetBorrowers = ({ setAuth }) => {
   const [clients, setClients] = useState([]);
   const [emails, setEmail] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate hook
-
   const getClients = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -17,6 +16,7 @@ const GetBorrowers = ({ setAuth }) => {
       });
 
       const parseRes = await response.json();
+
       setClients(parseRes);
     } catch (error) {
       console.log(error);
@@ -26,14 +26,13 @@ const GetBorrowers = ({ setAuth }) => {
   // Select EMAIL CLIENT Function
   async function selectClient(email) {
     try {
-      const response = await fetch(`http://localhost:8000/email/${email}`, {
+      await fetch(`http://localhost:8000/email/${email}`, {
         method: "GET",
         headers: { Authorization: localStorage.getItem("token") },
       });
 
-      if (!response.ok) throw new Error("Failed to fetch client");
-
       setEmail(clients.map((client) => email));
+
       console.log(emails[0]);
     } catch (error) {
       console.log(error.message);
@@ -52,15 +51,15 @@ const GetBorrowers = ({ setAuth }) => {
         <div className="w-1/2">
           {/* TITLE */}
           <div className="flex items-center justify-between border-y-2 mt-5">
-            <h3 className="text-lg font-medium leading-6 text-gray my-2 px-1 py-2">
+            <h3 className="text-lg font-medium leading-6 text-gray my-2  px-1 py-2 ">
               Clients Contact Info
             </h3>
           </div>
           {/* INFO */}
-          <div className="w-full h-[650px] px-4 overflow-auto hover:overflow-scroll mt-5 border rounded shadow-md border-t-4 border-t-red-500">
+          <div className="w-full h-[650px] px-4 overflow-auto hover:overflow-scroll mt-5 border rounded shadow-md border-t-4 border-t-red-500 ">
             <table className="table-fixed text-center">
-              <thead>
-                <tr>
+              <thead className="">
+                <tr className="">
                   <th className="w-1/1 px-1 py-2 text-gray-600">ID</th>
                   <th className="w-1/4 px-1 py-2 text-gray-600">Full Name</th>
                   <th className="w-1/4 px-1 py-2 text-gray-600">
@@ -87,8 +86,8 @@ const GetBorrowers = ({ setAuth }) => {
                         <td className="border px-4 py-2 bg-gray-50">
                           {client.id}
                         </td>
-                        <td className="border px-4 py-2">
-                          {client.firstName + " " + client.lastName}
+                        <td className="border px-4 py-2 ">
+                          {client.firstName + " " + client.lastName}{" "}
                         </td>
                         <td className="border px-4 py-2 bg-gray-50">
                           {client.contactNumber}
@@ -99,26 +98,13 @@ const GetBorrowers = ({ setAuth }) => {
                         </td>
                         <td className="border px-4 py-2">
                           <div className="flex">
-                            <button
-                              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mr-2"
-                              onClick={async () => {
-                                // Check if the client exists
-                                const exists = clients.some(
-                                  (c) => c.id === client.id
-                                );
-                                if (exists) {
-                                  // Navigate to the borrower's page
-                                  navigate(`/Borrower/${client.id}`);
-                                } else {
-                                  // Reload the page
-                                  window.location.reload(); // Reload the current page
-                                }
-                              }}
-                            >
-                              <VisibilityOutlined className="text-sm" />
+                            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mr-2 ">
+                              <Link to={`/Borrower/${client.id}`}>
+                                <VisibilityOutlined className="text-sm" />
+                              </Link>
                             </button>
                             <button
-                              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full "
                               onClick={() => selectClient(client.email)}
                             >
                               <Check />
@@ -137,7 +123,7 @@ const GetBorrowers = ({ setAuth }) => {
         <div className="w-1/2">
           {/* TITLE */}
           <div className="flex items-center justify-between border-y-2 mt-5">
-            <h3 className="text-lg font-medium leading-6 text-gray my-2 px-1 py-2">
+            <h3 className="text-lg font-medium leading-6 text-gray my-2  px-1 py-2 ">
               Email Form
             </h3>
           </div>
