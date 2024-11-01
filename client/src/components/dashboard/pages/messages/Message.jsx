@@ -1,9 +1,10 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import emailjs from "emailjs-com";
+import { useEffect, useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import { toast, ToastContainer } from "react-toastify";
 
 export default function Message({ email }) {
+  const form = useRef();
   const [fullname, setFullname] = useState([]);
 
   const getClient = async () => {
@@ -43,10 +44,10 @@ export default function Message({ email }) {
 
     emailjs
       .sendForm(
-        "service_2kyejr4",
-        "Loan_Approval",
+        "service_7n5jm3g",
+        "template_hnviwua",
         e.target,
-        "mDqAo3YVF6cq60oy7"
+        "5Dlrrwbt4lFd_ZOEB"
       )
       .then(
         (result) => {
@@ -71,7 +72,7 @@ export default function Message({ email }) {
       <div className="w-full h-[650px] px-4 mt-5 border rounded shadow-md border-t-4 border-t-red-500 ">
         <div class="w-full px-8  bg-white ">
           <div class=" py-2.5 ">
-            <form onSubmit={sendEmail} class="space-y-8">
+            <form ref={form} onSubmit={sendEmail} class="space-y-8">
               {/* NAME EMAIL */}
               <div className="flex w-full gap-5">
                 {/* FIRSTNAME */}
