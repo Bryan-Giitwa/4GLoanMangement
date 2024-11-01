@@ -711,11 +711,16 @@ const Landing = () => {
               href="#"
               class="flex items-center justify-center mb-5 text-2xl font-semibold text-gray-900 "
             >
-              <img src="" class="h-6 mr-3 sm:h-9" alt="" />
-              Maogma.
+              <h3 className="text-xl font-extrabold tracking-tight text-red-500 ">
+                4G<span className="text-gray-900">™</span>
+              </h3>
             </a>
             <span class="block text-sm text-center text-gray-500 ">
-              © 2022-2023 Maogma™. All Rights Reserved.
+              © 2024{" "}
+              <span className="text-xl font-extrabold tracking-tight text-red-500 ">
+                4G
+              </span>
+              <span className="text-gray-900">™</span>. All Rights Reserved.
             </span>
             <ul class="flex justify-center mt-5 space-x-5">
               <li>

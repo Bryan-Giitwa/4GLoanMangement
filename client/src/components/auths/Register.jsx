@@ -70,7 +70,10 @@ const Register = ({ setAuth }) => {
           {/* GREETINGS */}
           <div className="mt-5">
             <h1 className="text-xl font-semibold ">
-              Welcome to <span className="text-red-500">Maogma</span>.
+              Welcome to{" "}
+              <span className="text-4xl font-extrabold tracking-tight text-red-500 mb-4">
+                4G <span className="text-gray-900">™</span>
+              </span>
             </h1>
             <small className="text-gray-400">Please enter your details</small>
           </div>
